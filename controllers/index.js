@@ -6,18 +6,12 @@ const util = require('../utils/email');
 const axios = require('axios')
 const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
 
-async function getValue(){
-    const response = await axios
-    .get(url)
-    return response.data;
-}
-
 module.exports = {
-    value: async (req, res, next) => {
+    value: async (req,res,next) => {
         try {
-            const value = await getValue();
+            const value = await axios.get(url);
             
-            if(value==null){
+            if(value.data==null){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
@@ -25,7 +19,7 @@ module.exports = {
                 })
             }
             const data = await Sensor.create({
-                value: value
+                value: value.data
             })
             
             if(data.value>=400){
