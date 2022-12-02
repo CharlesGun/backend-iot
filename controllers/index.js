@@ -5,20 +5,16 @@ const {
 const util = require('../utils/email');
 const axios = require('axios')
 const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
-let inputSensor = 0; 
-axios
-.get(url)
-.then(res =>{
-    return res.json()
-})
-.then(data => {
-    inputSensor = data;
-})
+
+async function getValue(){
+    const {data} = await axios.get(url)
+    return data;
+}
 
 module.exports = {
     value: async (req, res, next) => {
         try {
-            const value = inputSensor;
+            const value = getValue();
             
             if(value==null){
                 return res.status(400).json({
