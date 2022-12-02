@@ -12,7 +12,7 @@ module.exports = {
             const data = await response.json();
             const nilai1 = JSON.stringify(data)
             const nilai = parseFloat(nilai1)
-            if(+nilai==null){
+            if(nilai==NaN || nilai==null){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
@@ -20,7 +20,7 @@ module.exports = {
                 })
             }
             const input = await Sensor.create({
-                value: +nilai
+                value: nilai
             })
             
             if(input.value>=400){
