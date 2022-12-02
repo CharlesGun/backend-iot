@@ -5,41 +5,45 @@ const {
 const util = require('../utils/email');
 const axios = require('axios')
 const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
+let inputSensor = 0; 
+axios
+.get(url)
+.then(res =>{
+    return res.json()
+})
+.then(data => {
+    inputSensor = data;
+})
 
 module.exports = {
     value: async (req, res, next) => {
-            await fetch(url)
-            .then((res)=>{
-                return res.json();
-            })
-            .then(data=>{
-                const value = data
-                if(value==null){
-                    return res.status(400).json({
-                        status: false,
-                        message: 'inset value failed!',
-                        data: null
-                    })
-                }
-                const input = Sensor.create({
-                    value: value
+        try {
+            const value = inputSensor;
+            
+            if(value==null){
+                return res.status(400).json({
+                    status: false,
+                    message: 'inset value failed!',
+                    data: null
                 })
-                
-                if(input.value>=400){
-                    htmlEmail = util.getHtml('announce.ejs',{});
-                    util.sendEmail(htmlEmail);
-                }
-    
-                return res.status(200).json({
-                    status: true,
-                    message: 'inset value success!',
-                    data: input
-                })
+            }
+            const data = await Sensor.create({
+                value: value
             })
             
-            .catch (err=> {
+            if(data.value>=400){
+                htmlEmail = await util.getHtml('announce.ejs',{});
+                await util.sendEmail(htmlEmail);
+            }
+
+            return res.status(200).json({
+                status: true,
+                message: 'inset value success!',
+                data: data
+            })
+        } catch (err) {
             next(err)
-        })
+        }
     },
     getAll: async (req,res,next)=>{
         try{
