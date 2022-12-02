@@ -10,4 +10,3 @@ router.post('/iot/sensor/post', c.value);
 router.get('/iot/sensor', c.getAll);
 
 module.exports = router;
-module.exports = router;

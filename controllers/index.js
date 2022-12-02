@@ -5,18 +5,16 @@ const {
 const util = require('../utils/email');
 const axios = require('axios')
 const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
-var value = 0;
 module.exports = {
-    value: (req,res,next) => {
+    value: async (req,res,next) => {
         try {
-            axios({
+            await axios({
                 method: 'get',
                 url: url,
                 responseType: 'json'
             })
             .then(function (response) {
-                value = response.data;
-                if(value==null){
+                if(response.data==null){
                     return res.status(400).json({
                         status: false,
                         message: 'inset value failed!',
