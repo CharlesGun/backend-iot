@@ -9,9 +9,9 @@ const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8
 module.exports = {
     value: async (req,res,next) => {
         try {
-            const value = await axios.get(url);
+            const response = await axios.get(url);
             
-            if(value.data==null){
+            if(response.data==null){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
@@ -19,7 +19,7 @@ module.exports = {
                 })
             }
             const data = await Sensor.create({
-                value: value.data
+                value: response.data
             })
             
             if(data.value>=400){
