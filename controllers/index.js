@@ -6,7 +6,7 @@ const util = require('../utils/email');
 module.exports = {
     value: async (req,res,next) => {
         try {
-            const {value} = req.query;
+            const {value} = req.body;
             if(!value){
                 return res.status(400).json({
                     status: false,
