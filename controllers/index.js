@@ -12,7 +12,7 @@ module.exports = {
             const data = await response.json();
             const nilai1 = JSON.stringify(data)
             const nilai = parseFloat(nilai1)
-            if(nilai==NaN || nilai==null){
+            if(isNaN(nilai)){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
