@@ -12,7 +12,7 @@ module.exports = {
             const response = await fetch(url);
             const data = await response.json();
 
-            if(data==null){
+            if(+data==null){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
@@ -20,7 +20,7 @@ module.exports = {
                 })
             }
             const input = await Sensor.create({
-                value: data
+                value: +data
             })
             
             if(input.value>=400){
