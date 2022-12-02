@@ -4,10 +4,11 @@ const {
 
 const util = require('../utils/email');
 const fetch = require('node-fetch')
+const {BLYNK_TOKEN}= process.env;
 module.exports = {
     value: async (req,res,next) => {
         try {
-            const response = await fetch("https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0");
+            const response = await fetch(`https://blynk.cloud/external/api/get?token=${BLYNK_TOKEN}&v0`);
             const data = await response.text();
             console.log(data)
             if(isNaN(+data)){
