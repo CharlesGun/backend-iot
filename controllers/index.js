@@ -9,7 +9,7 @@ module.exports = {
         try {
             const {
                 value
-            } = req.query;
+            } = req.body;
 
             
             const data = await Sensor.create({
@@ -43,7 +43,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "get data successful!",
-                data: values
+                data: [values.value]
             });
         } catch(err){
             next(err)
