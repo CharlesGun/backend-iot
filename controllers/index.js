@@ -1,29 +1,24 @@
 const {
     Sensor
 } = require('../models')
-
 const util = require('../utils/email');
-const fetch = require('node-fetch')
-const {BLYNK_TOKEN}= process.env;
+
 module.exports = {
     value: async (req,res,next) => {
         try {
-            const response = await fetch(`https://blynk.cloud/external/api/get?token=${BLYNK_TOKEN}&v0`);
-            const data = await response.text();
-            console.log(data)
-            if(isNaN(+data)){
-                console.log(data)
+            const {value} = req.query;
+            if(!value){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
                     data: null
                 })
             }
-            const input = await Sensor.create({
-                value: +data
+            const data = await Sensor.create({
+                value: value
             })
             
-            if(input.value>=400){
+            if(data.value>=400){
                 htmlEmail = await util.getHtml('announce.ejs',{});
                 await util.sendEmail(htmlEmail);
             }
@@ -31,7 +26,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: 'inset value success!',
-                data: input
+                data: data
             })
         } catch (err) {
             next(err)
