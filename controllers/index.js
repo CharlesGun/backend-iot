@@ -3,12 +3,11 @@ const {
 } = require('../models')
 
 const util = require('../utils/email');
-const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
 const fetch = require('node-fetch')
 module.exports = {
     value: async (req,res,next) => {
         try {
-            const response = await fetch(url);
+            const response = await fetch("https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0");
             const data = await response.text();
             console.log(data)
             if(isNaN(+data)){

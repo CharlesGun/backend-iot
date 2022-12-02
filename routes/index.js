@@ -6,7 +6,8 @@ const c = require('../controllers')
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'IOT-API' });
 });
-router.get('/iot/sensor/post', c.value);
+router.get('/iot/sensor/get', c.value);
+router.post('/iot/sensor/post', c.value);
 router.get('/iot/sensor', c.getAll);
 
 module.exports = router;
