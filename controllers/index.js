@@ -43,7 +43,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "get data successful!",
-                data: [values.value]
+                data: values
             });
         } catch(err){
             next(err)
