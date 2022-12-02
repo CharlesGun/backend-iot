@@ -10,7 +10,9 @@ module.exports = {
         try {
             const response = await fetch(url);
             const data = await response.text();
+            console.log(data);
             if(isNaN(+data)){
+                console.log(data);
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
