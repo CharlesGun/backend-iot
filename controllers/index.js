@@ -9,7 +9,7 @@ module.exports = {
         try {
             const {
                 value
-            } = req.body;
+            } = req.query;
 
             
             const data = await Sensor.create({
