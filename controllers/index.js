@@ -9,9 +9,9 @@ module.exports = {
     value: async (req,res,next) => {
         try {
             const response = await fetch(url);
-            const data = await response.json();
+            const data = await response.text();
             const nilai = Number(data)
-            if(isNaN(nilai)){
+            if(isNaN(+nilai)){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
@@ -19,7 +19,7 @@ module.exports = {
                 })
             }
             const input = await Sensor.create({
-                value: nilai
+                value: +nilai
             })
             
             if(input.value>=400){
