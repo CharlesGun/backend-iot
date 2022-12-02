@@ -3,15 +3,20 @@ const {
 } = require('../models')
 
 const util = require('../utils/email');
+const axios = require('axios')
 
 module.exports = {
     value: async (req, res, next) => {
         try {
-            const {
-                value
-            } = req.query;
-
+            const value = await axios.get('https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0');
             
+            if(value==null){
+                return res.status(400).json({
+                    status: false,
+                    message: 'inset value failed!',
+                    data: null
+                })
+            }
             const data = await Sensor.create({
                 value: value
             })
