@@ -10,7 +10,8 @@ module.exports = {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            const nilai = parseFloat(data)
+            const nilai1 = JSON.stringify(data)
+            const nilai = parseFloat(nilai1)
             if(+nilai==null){
                 return res.status(400).json({
                     status: false,
