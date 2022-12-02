@@ -11,7 +11,7 @@ module.exports = {
         try {
             const response = await axios.get(url);
             
-            if(response.data==null){
+            if(response.status!=200){
                 return res.status(400).json({
                     status: false,
                     message: 'inset value failed!',
