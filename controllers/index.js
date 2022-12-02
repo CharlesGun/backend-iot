@@ -7,14 +7,15 @@ const axios = require('axios')
 const url = 'https://blynk.cloud/external/api/get?token=hgqbm33XJgDRC_wzDcZSaEp8R5X5PMHT&v0'
 
 async function getValue(){
-    const {data} = await axios.get(url)
-    return data;
+    const response = await axios
+    .get(url)
+    return response.data;
 }
 
 module.exports = {
     value: async (req, res, next) => {
         try {
-            const value = getValue();
+            const value = await getValue();
             
             if(value==null){
                 return res.status(400).json({
