@@ -34,7 +34,9 @@ module.exports = {
     },
     getAll: async (req,res,next)=>{
         try{
-            const values = await Sensor.findAll();
+            const values = await Sensor.findAll({
+                order: [['id','desc']]
+            });
             if (!values) {
                 res.status(404).json({
                 status: false,
