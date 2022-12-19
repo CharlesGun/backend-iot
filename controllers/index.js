@@ -18,7 +18,7 @@ module.exports = {
                 value: value
             })
             
-            if(data.value>=400){
+            if(data.value>=300){
                 htmlEmail = await util.getHtml('announce.ejs',{});
                 await util.sendEmail(htmlEmail);
             }
@@ -32,7 +32,7 @@ module.exports = {
             next(err)
         }
     },
-    
+
     getAll: async (req,res,next)=>{
         try{
             const values = await Sensor.findAll({
