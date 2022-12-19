@@ -32,6 +32,7 @@ module.exports = {
             next(err)
         }
     },
+    
     getAll: async (req,res,next)=>{
         try{
             const values = await Sensor.findAll({
