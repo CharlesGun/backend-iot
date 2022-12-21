@@ -17,7 +17,7 @@ module.exports = {
 
                 const mailOptions = {
                     from: `"Pendeteksi Asap"<noreply@iot.com>`,
-                    to: 'charlesgunawan32@gmail.com',
+                    to: ['charlesgunawan32@gmail.com', 'kwinnyintan17@gmail.com'],
                     subject: 'BAHAYA!!',
                     html
                 };
